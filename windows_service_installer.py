@@ -5,8 +5,25 @@ import shutil
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import platform
 import struct
-
+import lib_copier
+os.system('cls')
 print('Starting application')
+print('++++++++++++++++++++++++++++++++++++++++')
+print('++ Welcome to Windows Service Creator ++')
+print('++++++++++++++++++++++++++++++++++++++++')
+print('This application works easily to create a Windows service with some steps')
+
+print('This application:')
+print('- Copies all files of your application to the destination folder')
+print('- Checks if there is NSSM file on the current directory')
+print('- Download NSSM file is it doesn`t exists')
+print('- Unzip NSSM file to the current folder')
+print('- Checks the operation system is 64 or 32 bits based')
+print('- Copies NSSM for the operation system base.')
+print('- Create the application as a service')
+input("Press ENTER")
+os.system('cls')
+
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -44,10 +61,8 @@ def checkNSSMExist(save_path):
 
 checkNSSMExist(save_path)
 
-# Setting up the installation directory.
 install_default = r"C:\automacoes_sem_parar"
 
-# Function to set the installation path
 def path_set(install_default):
     current_path = install_default
     global install_location
@@ -56,7 +71,6 @@ def path_set(install_default):
     confirmation = input("Is this correct? Type Y(YES) to confirm or N(NO) to change it:\n")
     return install_location, confirmation
 
-# Main function to handle the installation path setup
 def main(install_default):
     while True:
         install_location, confirmation = path_set(install_default)
@@ -72,7 +86,6 @@ if __name__ == "__main__":
 def is_64bit_windows():
     return platform.machine().endswith('64') or struct.calcsize("P") * 8 == 64
 
-# Function to create directory structure
 def create_directory_structure(to_create_path):
     try:
         os.makedirs(to_create_path, exist_ok=True)
@@ -80,7 +93,6 @@ def create_directory_structure(to_create_path):
     except Exception as e:
         print(f"Error creating directory: {e}")
 
-# Function to copy the NSSM executable to the installation location
 def copy_file(source_file, install_location, arch):
     try:
         if os.path.exists(source_file):
@@ -92,7 +104,6 @@ def copy_file(source_file, install_location, arch):
     except Exception as e:
         print(f"Error copying the file: {e}")
 
-# Determine architecture and set source file path
 if is_64bit_windows():
     arch = 64
     nssm_dir = os.path.join(extract_to, 'nssm-2.24\win64')
@@ -108,13 +119,15 @@ print(f"Installation location: {install_location}")
 create_directory_structure(install_location)
 copy_file(source_file, install_location, arch)
 
+source_dir = '.'
+dest_dir = install_location
+exceptions = ['NSSM', 'nssm-2.24.zip', 'windows_service_installer.exe']
 
-# print(f"Chosen path: {install_location}")
+lib_copier.copy_files(source_dir, dest_dir, exceptions)
 
-# Check the path loop that is wrong generating error.
-# Copy files to the install_location
-# Create service
+app_name = input('\nType the executable application (app.exe):\n')
 
 
-# 
+# check the source app installator
+# check
 
