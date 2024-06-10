@@ -6,10 +6,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import platform
 import struct
 import lib_copier
+import lib_service
+
 os.system('cls')
 print('Starting application')
 print('++++++++++++++++++++++++++++++++++++++++')
 print('++ Welcome to Windows Service Creator ++')
+print('+++++++ REQUIRE ADMIN PRIVILEGES +++++++')
 print('++++++++++++++++++++++++++++++++++++++++')
 print('This application works easily to create a Windows service with some steps')
 
@@ -23,7 +26,6 @@ print('- Copies NSSM for the operation system base.')
 print('- Create the application as a service')
 input("Press ENTER")
 os.system('cls')
-
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -125,9 +127,7 @@ exceptions = ['NSSM', 'nssm-2.24.zip', 'windows_service_installer.exe']
 
 lib_copier.copy_files(source_dir, dest_dir, exceptions)
 
-app_name = input('\nType the executable application (app.exe):\n')
-
-
-# check the source app installator
-# check
-
+executable_file = input('\nType the executable application (app.exe):\n')
+service_name = input('\nType the friendly Service Name:\n')
+nssm_path = install_location + f'\\nssm.exe'
+lib_service.create_service(nssm_path, executable_file, service_name)
