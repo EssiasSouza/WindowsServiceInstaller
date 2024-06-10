@@ -7,6 +7,8 @@ import platform
 import struct
 import lib_copier
 import lib_service
+from lib_lister import choose_executable
+import time
 
 os.system('cls')
 print('Starting application')
@@ -101,6 +103,8 @@ def copy_file(source_file, install_location, arch):
             shutil.copy(source_file, install_location)
             print(f"This system is running a Windows {arch}-bit OS.")
             print(f"NSSM {arch}-bit copied to {install_location} successfully.")
+            print('-------------------------------------------------------------')
+            time.sleep(2)
         else:
             print(f"Source file does not exist: {source_file}")
     except Exception as e:
@@ -115,7 +119,7 @@ else:
     nssm_dir = os.path.join(extract_to, 'nssm-2.24\win32')
     source_file = os.path.join(nssm_dir, 'nssm.exe')
 
-print(f"Source file path: {source_file}")
+os.system('cls')
 print(f"Installation location: {install_location}")
 
 create_directory_structure(install_location)
@@ -123,11 +127,22 @@ copy_file(source_file, install_location, arch)
 
 source_dir = '.'
 dest_dir = install_location
-exceptions = ['NSSM', 'nssm-2.24.zip', 'windows_service_installer.exe']
+exceptions = ['NSSM', 'nssm-2.24.zip', 'mainWinSCInstaller.exe']
 
 lib_copier.copy_files(source_dir, dest_dir, exceptions)
 
-executable_file = input('\nType the executable application (app.exe):\n')
+
+dest_dir = install_location
+if __name__ == '__main__':
+    selected_executable = choose_executable(dest_dir)
+    if selected_executable:
+        print(f"You selected: {selected_executable}")
+    else:
+        print("No executable selected.")
+
+
+executable_file = f"{install_location}\{selected_executable}"
 service_name = input('\nType the friendly Service Name:\n')
 nssm_path = install_location + f'\\nssm.exe'
+print(executable_file)
 lib_service.create_service(nssm_path, executable_file, service_name)

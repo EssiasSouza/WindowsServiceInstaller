@@ -1,8 +1,8 @@
 import subprocess
 
-nssm_path = r'C:\automacoes_sem_parar\teste6\nssm.exe'
-executable_file = r'C:\automacoes_sem_parar\teste6\teste.exe'
-service_name = 'MyPythonService'
+nssm_path = r'C:\automacoes_sem_parar\01\nssm.exe'
+executable_file = r'C:\automacoes_sem_parar\01\Service_tester_EXE.exe'
+service_name = 'Teste Essias'
 
 def create_service(nssm_path, executable_file, service_name):
     command = [nssm_path, 'install', service_name, executable_file]
@@ -12,5 +12,5 @@ def create_service(nssm_path, executable_file, service_name):
     except subprocess.CalledProcessError as e:
         print(f"Error creating the service: {e}")
 
-# if __name__ == "__main__":
-#     create_service()
+if __name__ == "__main__":
+    create_service(nssm_path, executable_file, service_name)
