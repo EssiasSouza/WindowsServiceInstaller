@@ -145,4 +145,4 @@ executable_file = f"{install_location}\{selected_executable}"
 service_name = input('\nType the friendly Service Name:\n')
 nssm_path = install_location + f'\\nssm.exe'
 print(executable_file)
-lib_service.create_service(nssm_path, executable_file, service_name)
+lib_service.create_service(nssm_path, executable_file, service_name, install_location)
