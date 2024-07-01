@@ -15,6 +15,8 @@ To use the application please follow the steps below.
 - If you typed YES, the application will copy all files on the source diretory to the target directory, listing all of EXE files exists on the target directory.
 - Choose by number your executable file that will be your service and press ENTER.
 - Type your service name and press ENTER.
+- Configure your user admin on the NSSM interface to provide permission for your application.
++ NOTE - If your application doesn`t need permission to access a directory or other resource you can jump this step.
 
 Your service should be created.
 

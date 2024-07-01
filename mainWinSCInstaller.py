@@ -127,7 +127,7 @@ copy_file(source_file, install_location, arch)
 
 source_dir = '.'
 dest_dir = install_location
-exceptions = ['NSSM', 'nssm-2.24.zip', 'mainWinSCInstaller.exe']
+exceptions = ['NSSM', 'nssm-2.24.zip', 'mainWinSCInstaller.exe', 'mainWinSCInstaller.zip', 'mainWinSCInstaller' ]
 
 lib_copier.copy_files(source_dir, dest_dir, exceptions)
 
